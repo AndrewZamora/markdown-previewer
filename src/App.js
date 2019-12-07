@@ -11,11 +11,11 @@ class App extends Component {
     };
   };
   convertToMarkdown = text => {
-    return (marked(text));
+    // This is a React thing. Check out this link https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml
+    return { __html: marked(text) };
   }
   handleInput = event => {
     const input = event.target.value;
-    // const markdown =;
     this.setState({
       input: input
     });
@@ -23,10 +23,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <textarea id="editor"  onChange={(e)=>this.handleInput(e)}></textarea>
-        <div id="preview" className="preview">
-          {this.convertToMarkdown(this.state.input)}
-        </div>
+        <textarea id="editor" value={this.state.input} onChange={(e) => this.handleInput(e)}></textarea>
+        <div id="preview" className="preview" dangerouslySetInnerHTML={this.convertToMarkdown(this.state.input)} />
       </div>
     )
   }
