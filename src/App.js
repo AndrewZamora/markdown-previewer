@@ -7,8 +7,12 @@ const defaultInput = {
   header: '# Example Header',
   subHeader: '## Example Sub-Header',
   link: '[Example Link]("https://www.freecodecamp.org")',
-  inlineCode: '` Example of inline code `',
-  codeBlock: `\`\`\`\()=>{Example Code Block}\`\`\``,
+  inlineCode: '\` Example of inline code \`',
+  multiLineCode: `\`\`\`
+  function example() {
+    return 'this is a multi-lineCode block';
+  }
+  \`\`\``,
   image: '![example img](example-img.jpg)',
   boldedText: '**Example Bolded Text**',
   listItem: '- Example List Item',
@@ -33,9 +37,7 @@ class App extends Component {
   }
   convertToMarkdown = text => {
     // Sanitizing text can be handled here
-    return text.split('\n').map(word => {
-      return marked(word);
-    }).join("");
+    return marked(text);
   }
   handleInput = event => {
     const input = event.target.value;
