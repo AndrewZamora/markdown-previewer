@@ -11,8 +11,8 @@ const defaultInput = {
   multiLineCode: `\`\`\`
   function example() {
     return 'this is a multi-lineCode block';
-  }
-  \`\`\``,
+  } 
+\`\`\``,
   image: '![example img](example-img.jpg)',
   boldedText: '**Example Bolded Text**',
   listItem: '- Example List Item',
@@ -37,6 +37,11 @@ class App extends Component {
   }
   convertToMarkdown = text => {
     // Sanitizing text can be handled here
+    marked.setOptions({
+      // Creates <br> for line carriages (new lines)
+      gfm: true,
+      breaks: true,
+    });
     return marked(text);
   }
   handleInput = event => {
