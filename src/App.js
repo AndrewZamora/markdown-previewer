@@ -53,10 +53,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <textarea id="editor" value={this.state.input} onChange={(e) => this.handleInput(e)}></textarea>
-        {/* This is a React thing. Check out this link https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml */}
-
-        <div id="preview" className="preview" dangerouslySetInnerHTML={{ __html: this.convertToMarkdown(this.state.input) }} />
+        <h1>Markdown Previewer</h1>
+        <div className="container">
+          <textarea id="editor" value={this.state.input} onChange={(e) => this.handleInput(e)}></textarea>
+          {/* This is a React thing. Check out this link https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml */}
+          <div id="preview" className="preview" dangerouslySetInnerHTML={{ __html: this.convertToMarkdown(this.state.input) }} />
+        </div>
       </div>
     )
   }
