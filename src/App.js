@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import marked from 'marked';
+import DOMPurify from 'dompurify';
 import './App.css';
 
 const defaultInput = {
@@ -18,6 +19,7 @@ const defaultInput = {
   listItem: '- Example List Item',
   blockquote: '> Example Blockquote',
 }
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -35,14 +37,18 @@ class App extends Component {
       input: allDefaultInput
     })
   }
+  sanitize = dirtyInput => {
+    return DOMPurify.sanitize(dirtyInput);
+  }
   convertToMarkdown = text => {
-    // Sanitizing text can be handled here
     marked.setOptions({
       // Creates <br> for line carriages (new lines)
       gfm: true,
       breaks: true,
     });
-    return marked(text);
+    const dirtyMD = marked(text);
+     // Sanitizing markdown can be handled here
+    return this.sanitize(dirtyMD);
   }
   handleInput = event => {
     const input = event.target.value;
